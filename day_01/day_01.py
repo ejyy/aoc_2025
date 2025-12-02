@@ -14,22 +14,22 @@ for line in input:
     # Extract the magnitude (ie. L50 -> 50)
     magnitude = int(line[1:])
 
-    # Left is negative, right is positive
-    magnitude = -magnitude if direction == "L" else magnitude
+    # Simulate the dial turning, one step at a time
+    for _ in range(magnitude):
+        # Right is positive, left is negative
+        if direction == "R":
+            # Modulo function (remainder of division) for new dial index
+            current_position = (current_position + 1) % 100
+        else:
+            current_position = (current_position - 1) % 100
 
-    # Difference based on instruction magnitude relative to current position
-    total_delta = current_position + magnitude
+        # Part2 - number of times it 'touches' zero
+        if current_position == 0:
+            part2 += 1
 
-    # Modulo function (remainder of division) for new dial index
-    current_position = total_delta % 100
-
-    # Part1 - if 'rests' on 0 after the instruction, increment part1
+    # Part1 - number of times it 'stops' on zero (after each instruction)
     if current_position == 0:
         part1 += 1
-
-    # Part2 - number of 'revolutions' around the dial face
-    part2 += abs(total_delta // 100)
-    # TODO: Need to catch some edge cases here, likely due to stopping not crossing 0
 
 print("Part 1:", part1)
 print("Part 2:", part2)
