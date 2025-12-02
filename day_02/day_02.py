@@ -6,21 +6,20 @@ input = [line.strip() for line in open("day_02_input.txt", 'r')]
 
 for line in input:
     # Separate at every comma (",")
-    split_line = line.split(",")
+    for product_range in line.split(","):
 
-    for product_range in split_line:
         # Separate at every dash ("-")
         split_range = product_range.split("-")
 
-        # Generate all numbers between the range
-        full_product_range = range(int(split_range[0]), int(split_range[1])+1)
+        # Loop through every number (inclusive) within the product range
+        for n in range(int(split_range[0]), int(split_range[1]) + 1):
 
-        for n in full_product_range:
-            # To check if repetitive, split the number in half
+            # To check if repetitive, split the number in half (as a string)
             n = str(n)
             n_first_half, n_second_half = n[:len(n)//2], n[len(n)//2:]
 
             if n_first_half == n_second_half:
+                # Increment part1 by the value of the repetitive ID
                 part1 += int(n)
 
 print("Part 1:", part1)
