@@ -23,11 +23,11 @@ for line in input:
     # Modulo function (remainder of division) for new dial index
     current_position = total_delta % 100
 
-    # If 'rests' on 0 after the instruction, increment part1
+    # Part1 - if 'rests' on 0 after the instruction, increment part1
     if current_position == 0:
         part1 += 1
 
-    # Number of 'revolutions' around the dial face
+    # Part2 - number of 'revolutions' around the dial face
     part2 += abs(total_delta // 100)
     # TODO: Need to catch some edge cases here, likely due to stopping not crossing 0
 
