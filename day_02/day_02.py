@@ -6,7 +6,6 @@ input = [line.strip() for line in open("day_02_input.txt", 'r')]
 
 # Separate at every comma (",")
 for product_range in input[0].split(","):
-
     # Separate at every dash ("-")
     split_range = product_range.split("-")
 
