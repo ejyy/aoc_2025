@@ -9,8 +9,7 @@ for line in input:
     l, w, h = map(int, line.split("x"))
 
     # Part1 - sum required paper plus additional for smallest side
-    s1, s2, s3 = 2*l*w, 2*w*h, 2*h*l
-    part1 += sum([s1, s2, s3, min(l*w, w*h, h*l)])
+    part1 += sum([2*l*w, 2*w*h, 2*h*l, min(l*w, w*h, h*l)])
 
     # Part2 - sum ribbon length
     sides = sorted([l, w, h])
