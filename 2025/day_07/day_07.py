@@ -20,6 +20,9 @@ while True:
     # A new double_ended queue to store updates
     next_q = deque()
 
+    # Create a set of unique splits at each '^'
+    unique_splits = set()
+
     # Iterate through all current position heads
     while current_positions:
         # Pop from the left of the queue
@@ -37,17 +40,18 @@ while True:
 
         # If splitter detected
         if cell == "^":
-            part1 += 1
+            # Add new position to set of unique splits
+            unique_splits.add((new_x, new_y))
             # Left split
             lx, ly = new_x + 1, new_y - 1
             # Bounds checking for left split
-            if lx >= 0 or lx < len(input) or ly >= 0 or ly < len(input[0]):
+            if lx >= 0 and lx < len(input) and ly >= 0 and ly < len(input[0]):
                 next_q.append((lx, ly))
 
             # Right split
             rx, ry = new_x + 1, new_y + 1
             # Bounds checking for right split
-            if rx >= 0 or rx < len(input) or ry >= 0 or ry < len(input[0]):
+            if rx >= 0 and rx < len(input) and ry >= 0 and ry < len(input[0]):
                 next_q.append((rx, ry))
 
         # Unimpeded path
@@ -65,12 +69,12 @@ while True:
     # Update current positions with newly created heads
     current_positions = next_q
 
+    # Append number of unique splits
+    part1 += len(unique_splits)
+
 # Pretty print the grid
 for line in input:
     print("".join(line))
-
-# Part1 - sum of beam splits
-part1 = sum(input, []).count("|")
 
 print("Part 1:", part1)
 print("Part 2:", part2)
